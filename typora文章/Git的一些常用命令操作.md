@@ -9,8 +9,8 @@
 
 SSH Key的作用：实现本地仓库和Github间的加密数据传输，它由两部分组成，分别是：
 
-- **id_rsa（私钥文件，存放于客户端的电脑中即可)**
-- **id rsa.pub (公钥文件，需要配置到Github 中)**
+- id_rsa（私钥文件，存放于客户端的电脑中即可)
+- id rsa.pub (公钥文件，需要配置到Github 中)
 
 生成SSH Key: 打开Git Bash,输入以下命令
 
@@ -92,4 +92,11 @@ ssh -T git@github.com
 本地有main  本地建立一个master，推送到远程master, 本地main也修改了push进main,需要将msater合入main,并推送到远程main
 
 远程有main
+
+| 分支操作 |   本地仓库   |    远程仓库     |                 备注                  |
+| :------: | :----------: | :-------------: | :-----------------------------------: |
+| 查看分支 | `git branch` | `git branch -v` | `git branch -a`查看本地和远程所有分支 |
+|          |              |                 |                                       |
+
+
 

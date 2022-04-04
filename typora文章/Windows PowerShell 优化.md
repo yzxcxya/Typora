@@ -29,9 +29,17 @@ Set-PSReadLineOption -PredictionSource History
 
 效果如下：![命令提示](C:\Users\yuhh\Pictures\命令提示.png)
 
-​	
+##### 3.修改默认背景图片
 
-​		
+打开power shell 的设置，选择打开JSON 文件
 
+![image-20220403163222810](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220403163222810.png)
 
+编辑json 文件，输入下面图片路径就行，透明度随自己调
+
+![image-20220403163416797](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220403163416797.png)
+
+我的图片是下面这个，想用的话可以直接右键保存
+
+![black-desk](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/black-desk.webp)
 
