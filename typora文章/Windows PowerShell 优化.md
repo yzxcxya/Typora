@@ -27,7 +27,7 @@ Import-Module PSReadLine
 Set-PSReadLineOption -PredictionSource History
 ~~~
 
-效果如下：![命令提示](C:\Users\yuhh\Pictures\命令提示.png)
+效果如下：![QQ截图20220404162700](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/QQ%E6%88%AA%E5%9B%BE20220404162700.png)
 
 ##### 3.修改默认背景图片
 
@@ -43,3 +43,4 @@ Set-PSReadLineOption -PredictionSource History
 
 ![black-desk](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/black-desk.webp)
 
+![white-desk](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/white-desk.webp)
