@@ -205,20 +205,46 @@ git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git ad
   回退到上一次commit的状态
 
   ~~~
-  git reset --hard HEAD^
+  git reset HEAD^
   ~~~
 
+  向前回退到第三个版本
+
+  ~~~
+  git reset HEAD~3 
+  ~~~
+  
+  回退1.txt这个文件到上一版本
+  
+  ~~~
+  git reset HEAD^ 1.txt
+  ~~~
+  
   回退到任意版本（可以使用 git log命令来查看git的提交历史，commit 后面的一串字符就是commit ID）
-
+  
   ~~~
-  git reset --hard commitId
+  git reset commitId
+  ~~~
+  
+  回退到和远程库一样
+  
+  ~~~
+  git reset origin/master 
   ~~~
 
 - 撤销远程提交
 
   ~~~
-  git reset --hard 上个commitid
+  git reset [--hard] 上个commitid
   git push -f  // 强制提交
+  ~~~
+
+- 回退的几个参数
+
+  ~~~
+  1. git reset --mixed：此为默认方式，不带任何参数的git reset，即时这种方式，它回退到某个版本，只保留源码，回退commit和index信息
+  2. git reset --soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可
+  3. git reset --hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容
   ~~~
 
 ##### 8.git放弃跟踪某些文件
