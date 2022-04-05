@@ -1,7 +1,3 @@
-
-
-
-
 ## GIT的一些常用命令操作
 
 ##### 1.配置SSH Key
@@ -156,6 +152,12 @@ git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git ad
 
 `git log -num --graph`: 查看git提交日志，num为显示几条，--graph是否用图形界面显示
 
+`git log --oneline`: 输出 简写commitid,提交说明
+
+`git log --pretty=format:"%h - %an, %ad ,%s" --graph`: 输出 简写commitid,作者名,提交日期,提交说明
+
+> git log 更多用法可以看网上这篇文章：[git log 命令详解](https://www.cnblogs.com/ay2021/p/15160893.html)，讲得特别特别详细
+
 ##### 5.git冲突
 
 一般来说，两个人修改了同一个文件（不管是同一文件不同行还是同一行），你`git pull`时就会有冲突错误报出来，然后在你冲突的文件，寻找用=====隔开的两部分，HEAD是你的内容，另外一部分是repos的内容，然后手工修改保留你想要的部分，在`git add` 和`git commit`然后再`git push`上去就好了。
@@ -164,7 +166,7 @@ git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git ad
 
 ![git](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/git.jpg)
 
-##### 7.撤销本地修改
+##### 7.撤销修改
 
 - 未使用 git add 缓存代码时：
 
@@ -212,6 +214,13 @@ git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git ad
   git reset --hard commitId
   ~~~
 
+- 撤销远程提交
+
+  ~~~
+  git reset --hard 上个commitid
+  git push -f  // 强制提交
+  ~~~
+
 ##### 8.git放弃跟踪某些文件
 
 一般我们总会有些文件无需纳入Git的管理，也不希望它们总出现在未跟踪文件列表。在这种情况下，我们可以在工程下新建`.gitignore`文件,并在其中添加要忽略的文件或目录，每行表示一个忽略规则，像下面一样
@@ -249,13 +258,83 @@ git commit -m ‘xxx’
 
 文件在`git commit`后，就会归属于某个分支了，此时你切换到另外一个分支，将不会显示上面分支修改的文件了。
 
+##### 10.Tag操作（打标签）
 
+Git 中的tag指向一次commit的id，通常用来给开发分支做一个标记，如标记一个版本号,如 v1.0.0。
 
+- 创建 Tag
 
+  ```shell
+  git tag tag名字
+  ```
 
+- 创建带注释的 Tag
 
+  ```
+  git tag -a Tag名字 -m 注释文字
+  ```
 
+- 为历史某个 commit 添加tag
 
+  ~~~
+  git log --oneline //先获取commitid
+  git tag tag名词 commitid
+  ~~~
+
+- 查看 Tag 列表
+
+  ~~~
+  git tag               //列出所有tag列表
+  git tag -l "*测试*"    //列出所有带“测试”的tag
+  ~~~
+
+- 查看 tag 的详细信息
+
+  ~~~
+  git show tag名字
+  ~~~
+
+- 删除 tag
+
+  ~~~
+  git tag -d tag名
+  ~~~
+
+- 推送 tag 到远程
+
+  ~~~
+  git push origin Tag名字 // 推送单个Tag
+  git push origin --tags  // 推送所有本地Tag
+  ~~~
+
+- 删除远程 tag
+
+  ~~~
+  git push origin :refs/tags/Tag名字
+  ~~~
+
+- 切换到标签（此时会处于一个空的分支上）
+
+  ~~~
+  git checkout tag名
+  ~~~
+
+- 修复历史tag中的bug
+
+  ~~~ 
+  git show v1.0               // 查看v1.0tag下的commitid
+  git checkout -b bugfix      // 新建分支用于修复bug
+  git reset --hard *****      // 回滚到tag下的那次commit
+  git add .                   // 添加代码到暂存区
+  git commit -m "修复bug"      // 提交到本地仓库
+  git tag v1.0.1              // 打标签
+  git checkout master         // 切回master
+  git merge bugfix            // 合并bugfix分支，一般会有冲突，需手动解决
+  git push origin master      // 推送合并后的分支到远程
+  git push origin v1.0.1      // 推送标签到远程
+  ~~~
+
+  
 
 
 
