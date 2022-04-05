@@ -1,3 +1,7 @@
+
+
+
+
 ## GIT的一些常用命令操作
 
 ##### 1.配置SSH Key
@@ -89,21 +93,32 @@ ssh -T git@github.com
 
 ##### 3.分支操作
 
-本地有main  本地建立一个master，推送到远程master, 本地main也修改了push进main,需要将msater合入main,并推送到远程main
+|  分支操作  |             本地仓库              |                     远程仓库                     |                  备注                  |
+| :--------: | :-------------------------------: | :----------------------------------------------: | :------------------------------------: |
+|  查看分支  |           `git branch`            |                 `git branch -r`                  | `git branch -a`查看本地和远程所有分支  |
+|  创建分支  |        `git branch 分支名`        |         本地切换到新分支并push会自动创建         |                                        |
+|  切换分支  |       `git checkout 分支名`       |                                                  | `git checkout -b 分支名`创建并切换分支 |
+|  删除分支  |      `git branch -d  分支名`      |           `git push origin -d 分支名`            |                                        |
+| 修改分支名 | `git branch -m 旧分支名 新分支名` | 修改本地分支名后推送到远程库，再删除远程库旧分支 |                                        |
 
-远程有main
+***合并分支场景***：将dev分支合入master分支：
 
-|  分支操作  |        本地仓库         |             远程仓库             |                  备注                  |
-| :--------: | :---------------------: | :------------------------------: | :------------------------------------: |
-|  查看分支  |      `git branch`       |         `git branch -r`          | `git branch -a`查看本地和远程所有分支  |
-|  创建分支  |   `git branch 分支名`   | 本地切换到新分支并push会自动创建 |                                        |
-|  切换分支  |  `git checkout 分支名`  |                                  | `git checkout -b 分支名`创建并切换分支 |
-|  删除分支  | `git branch -d  分支名` |                                  |                                        |
-| 修改分支名 |                         |                                  |                                        |
-
-
+1. 本地切换到dev分支，`git pull origin dev` 拉取远程仓库dev分支最新代码
+2. 再切换到master分支，先确保master分支也是最新代码，`git pull` 一下就行
+3. 执行`git merge dev`或者`git rebase dev` ,本地的master就把本地的dev分支合并了
+4. 最后`git push origin master`，把合并后的master提交到远程master分支
 
 ##### 4.git常用命令
+
+`git status [-s]`：查看git文件状态
+
+git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git add）,修改后直接提交
+
+`git pull <远程主机名> <远程分支名>:<本地分支名>`
+
+`git push <远程主机名> <本地分支名>:<远程分支名>` : 如果远程分支被省略，如上则表示将本地分支推送到与之存在追踪关系的远程分支（通常两者同名），如果该远程分支不存在，则会被新建；如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支，等同于 git push origin --delete master；如果当前分支与远程分支存在追踪关系，则本地分支和远程分支都可以省略，将当前分支推送到origin主机的对应分支；如果当前分支只有一个远程分支，那么主机名都可以省略；
+
+`git push -u origin master` : 如果当前分支与多个主机存在追踪关系，则可以使用-u选项关联一个默认远程仓库，这样后面就可以不加任何参数使用git push。
 
 `git diff [<path>...]`：什么参数都不加，默认比较工作区与暂存区的差异（`git add`后就无差异了）
 
@@ -111,17 +126,35 @@ ssh -T git@github.com
 
 `git diff --HEAD [<path>...]`：比较工作区与最新本地版本库。如果HEAD指向的是master分支，那么HEAD还可以换成master
 
+`git diff branch1 branch2 --stat`   :显示出所有有差异的文件(不详细,没有对比内容)
+
+`git diff branch1 branch2`   : 显示出所有有差异的文件的详细差异(更详细)
+
+`git diff branch1 branch2 具体文件路径` : 显示指定文件的详细差异(对比内容)
+
 `git remote -v`：查看当前关联的远程仓库地址
 
 `git remote remove origin` ：移除当前远程仓库的连接
 
 `git remote add origin 远程仓库地址`：和远程仓库地址建立连接
 
-git reset
+`git reset`：撤销本地修改
 
-git stash
+`git stash [<save 'message'>]` : 把所有未提交的修改（包括暂存的和非暂存的）都保存起来，用于后续恢复当前工作目录，当前的工作目录就干净了
 
+`git stash list`：查看现有stash
 
+`git stash pop [<stash@{0}>]`：重新应用缓存的stash，默认使用第一个存储,即stash@{0}，如果要使用其他个，git stash pop stash@{$num} ， 比如第二个：git stash popstash@{1} 
+
+`git stash apply [<stash@{0}>]` :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@{0}，如果要使用其他个，git stash apply stash@{$num} ， 比如第二个：git stash apply stash@{1} 
+
+`git stash drop[<stash@{0}>]`：删除stash，不带参数默认最近的
+
+`git stash clear`：删除所有缓存的stash
+
+`git stash show [<stash@{0}>] [-p]`：查看最近stash的diff
+
+`git log -num --graph`: 查看git提交日志，num为显示几条，--graph是否用图形界面显示
 
 ##### 5.git冲突
 
@@ -129,7 +162,7 @@ git stash
 
 ##### 6.git流程
 
-
+![git](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/git.jpg)
 
 ##### 7.撤销本地修改
 
@@ -149,7 +182,7 @@ git stash
 
   此命令用来放弃掉所有还没有加入到缓存区（就是 `git add` 命令）的修改：包括内容修改与文件删除。但是此命令不会删除掉新建的文件。因为刚新建的文件还没有加入到git的管理系统中，所以对于git是未知的，自己手动删除就可以了。
 
-- 使用了 git add 缓存了代码：
+- 使用了 git add 缓存了代码（取消暂存文件）：
 
   放弃某个文件的缓存
 
@@ -181,13 +214,24 @@ git stash
 
 ##### 8.git放弃跟踪某些文件
 
-在工程下新建`.gitignore`文件,并在其中添加要忽略的文件或目录，每行表示一个忽略规则，像下面一样
+一般我们总会有些文件无需纳入Git的管理，也不希望它们总出现在未跟踪文件列表。在这种情况下，我们可以在工程下新建`.gitignore`文件,并在其中添加要忽略的文件或目录，每行表示一个忽略规则，像下面一样
 
 ~~~
 target/
 *.iml
 .idea/
 ~~~
+
+.gitignore格式规范如下：
+
+>- 以#开头的是注释
+>- 以/结尾的是目录
+>- 以/开头防止递归,只作用当前目录
+>- 以!开头表示取反
+
+可以使用alob模式进行文件和文件夹的匹配（alob指简化了的正则表达式)
+
+![image-20220405175742986](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220405175742986.png)
 
 ***.gitignore不生效？***
 
@@ -199,7 +243,11 @@ git add .
 git commit -m ‘xxx’
 ~~~
 
+##### 9.git分支与工作区、暂存区关系
 
+文件不管新增修改，在`git add` 前后在任何一个分支都是全局的，在工作区都可见，切换分支不会影响它。
+
+文件在`git commit`后，就会归属于某个分支了，此时你切换到另外一个分支，将不会显示上面分支修改的文件了。
 
 
 
