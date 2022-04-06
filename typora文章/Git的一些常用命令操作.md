@@ -108,7 +108,7 @@ ssh -T git@github.com
 
 `git status [-s]`：查看git文件状态
 
-git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git add）,修改后直接提交
+`git commit [-a] -m message` : 提交文件到仓库，-a表示跳过暂存步骤（git add）,修改后直接提交
 
 `git pull <远程主机名> <远程分支名>:<本地分支名>`
 
@@ -129,6 +129,8 @@ git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git ad
 `git diff branch1 branch2 具体文件路径` : 显示指定文件的详细差异(对比内容)
 
 `git remote -v`：查看当前关联的远程仓库地址
+
+`git remote show origin`：查看remote地址，远程分支，还有本地分支与之对应的关系等信息
 
 `git remote remove origin` ：移除当前远程仓库的连接
 
@@ -205,7 +207,7 @@ git commit [-a] -m : 提交文件到仓库，-a表示跳过暂存步骤（git ad
   回退到上一次commit的状态
 
   ~~~
-  git reset HEAD^
+  git reset HEAD^    // HEAD^表示上一个版本，同HEAD~1, HEAD^^表示上上个版本,同HEAD~2
   ~~~
 
   向前回退到第三个版本
@@ -263,10 +265,11 @@ target/
 >- 以/结尾的是目录
 >- 以/开头防止递归,只作用当前目录
 >- 以!开头表示取反
-
-可以使用alob模式进行文件和文件夹的匹配（alob指简化了的正则表达式)
-
-![image-20220405175742986](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220405175742986.png)
+>- 星号* 匹配零个或多个任意字符
+>- [abc] 匹配任何哟个列在方括号中的字符
+>- 问号 ？匹配一个字符
+>- 方括号中使用短划线分割两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）
+>- 两个星号** 表示匹配任意中间目录，比如（a/**/z 可以匹配a/z，a/b/z 或者 a/b/c/z）
 
 ***.gitignore不生效？***
 
@@ -284,7 +287,7 @@ git commit -m ‘xxx’
 
 文件在`git commit`后，就会归属于某个分支了，此时你切换到另外一个分支，将不会显示上面分支修改的文件了。
 
-##### 10.Tag操作（打标签）
+##### 10.Tag 操作（打标签）
 
 Git 中的tag指向一次commit的id，通常用来给开发分支做一个标记，如标记一个版本号,如 v1.0.0。
 
