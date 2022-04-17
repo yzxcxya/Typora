@@ -1,11 +1,21 @@
 ## GIT的一些常用命令操作
 
-##### 1.配置SSH Key
+> Git官方文档：[中文官方文档](http://git-scm.com/book/zh/v2)
 
-> Github上的远程仓库有两种使用方式，分别是HTTPS和SSH，区别是：
+##### 1.远程仓库配置SSH Key
+
+Github上的远程仓库有两种使用方式，分别是HTTPS和SSH，区别是：
+
+- HTTPS:零配置，可以输入密码直接克隆项目，需要输入Github的账号和密码才能push成功
+- SSH：需要进行额外的ssh key配置，配置完成后，才能克隆项目，访问仓库不需要输入Github的账号和密码
+
+> HTTPS认证方式虽然需要输入账户密码，但现在也不需要每次都输入。这个凭据保存需要依赖一个凭据管理器，每个操作系统平台都有自己的凭据管理器。
 >
-> - HTTPS:零配置，需要重复输入Github的账号和密码才能访问成功
-> - SSH：需要进行额外的配置，配置完成后，访问仓库不需要重复输入Github的账号和密码
+> 当我们在使用http协议push之后，账号和密码会自动保存至凭据管理器中（如果有的话），之后就不需要每次push的时候都输入了。
+>
+> 当保存了密码后又想要修改密码或者删除密码怎么办？
+>
+> window上的git的密码是交给window进行管理的，我们可以进入‘控制面板’ - ‘用户账户’ - ‘凭证管理器’ - ‘Window凭据’-'普通凭据'，找到git的配置，进行修改
 
 SSH Key的作用：实现本地仓库和Github间的加密数据传输，它由两部分组成，分别是：
 
@@ -120,7 +130,7 @@ ssh -T git@github.com
 
 `git diff --cached [<path>...]`：比较暂存区与最新本地版本库（`git commit`后就无差异了）
 
-`git diff --HEAD [<path>...]`：比较工作区与最新本地版本库。如果HEAD指向的是master分支，那么HEAD还可以换成master
+`git diff HEAD [<path>...]`：比较工作区与最新本地版本库。如果HEAD指向的是master分支，那么HEAD还可以换成master
 
 `git diff branch1 branch2 --stat`   :显示出所有有差异的文件(不详细,没有对比内容)
 
@@ -339,7 +349,8 @@ Git 中的tag指向一次commit的id，通常用来给开发分支做一个标�
 - 删除远程 tag
 
   ~~~
-  git push origin :refs/tags/Tag名字
+  git push origin :refs/tags/Tag名字  // 相当于将空标签推送到远程
+  git push origin -d Tag名字
   ~~~
 
 - 切换到标签（此时会处于一个空的分支上）
