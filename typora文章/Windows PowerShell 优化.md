@@ -4,6 +4,20 @@
 
 
 
+修改git中文文件名乱码：
+
+乱码前![image-20220418115841397](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220418115841397.png)
+
+运行
+
+~~~
+git config --global core.quotepath false
+~~~
+
+解决后
+
+![image-20220418115938594](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220418115938594.png)
+
 ##### 2.安装 *PSReadLine*
 
 安装最新版本`PSReadLine`，在power shell中执行以下命令:
