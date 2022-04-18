@@ -256,8 +256,22 @@ ssh -T git@github.com
   ~~~
   1. git reset --mixed：此为默认方式，不带任何参数的git reset，即时这种方式，它回退到某个版本，只保留源码，回退commit和index信息
   2. git reset --soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可
-  3. git reset --hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容
+  3. git reset --hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容	
   ~~~
+  
+- 替换 commit
+
+  ~~~
+  有时候我们提交完了才发现漏掉了几个文件没有添加，或者提交信息写错了。 此时，可以运行带有 --amend 选项的提交命令来重新提交
+  $ git commit -m '第一次提交'
+  $ git add forgotten_file
+  $ git commit -m '代替第一次提交' --amend
+  此时第一次提交信息就会被替换掉
+  ~~~
+
+  
+
+
 
 ##### 8.git放弃跟踪某些文件
 
