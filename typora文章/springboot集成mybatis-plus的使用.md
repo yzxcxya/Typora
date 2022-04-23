@@ -127,7 +127,7 @@
 
 4. 配置mapper里xml扫描路径
 
-   mybatis-plus默认生成的xml文件在java包中，IDEA编译时默认不会扫描xml文件，运行项目后，发现target目录中根本没有mapper.xml文件
+   mybatis-plus默认生成的xml文件在java包中，IDEA编译时默认不会扫描 java 包下的 xml文件，运行项目后，发现target目录中根本没有mapper.xml文件
 
    ![image-20220416184048288](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/202204161840352.png)
 
@@ -156,7 +156,7 @@
    org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)
    ~~~
 
-   大概意思是mapper和mapper.xml没有关联起来，得在application.yml里加配置
+   大概意思是mapper和mapper.xml没有绑定起来，得在application.yml里加配置
 
    ~~~
    mybatis-plus:
