@@ -2,9 +2,13 @@
 
 ##### 1. 安装 *oh-my-posh*
 
+[Oh My Posh 官网](https://ohmyposh.dev/)
 
 
-修改git中文文件名乱码：
+
+
+
+**修改git中文文件名乱码：**
 
 乱码前![image-20220418115841397](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220418115841397.png)
 
@@ -19,6 +23,8 @@ git config --global core.quotepath false
 ![image-20220418115938594](https://picture-bucket-1306212000.cos.ap-nanjing.myqcloud.com/markdown/image-20220418115938594.png)
 
 ##### 2.安装 *PSReadLine*
+
+PSReadLine能够记录历史输入的命令，当下次输入命令时能够自动补全和提示
 
 安装最新版本`PSReadLine`，在power shell中执行以下命令:
 
