@@ -388,7 +388,28 @@ Git 中的tag指向一次commit的id，通常用来给开发分支做一个标�
   git push origin v1.0.1      // 推送标签到远程
   ~~~
 
-  
 
+##### 11.Git 提交代码规范
 
+`build`：修改构建系统或者外部依赖项
+
+`ci`：修改 CI 配置文件或脚本
+
+`docs`：修改文档
+
+`feat`：增加新特性
+
+`fix`：修复 Bug
+
+`pref`：性能优化
+
+`refactor`：代码重构
+
+`style`：代码风格、代码规范修改
+
+`test`：测试代码修改
+
+`revert`：撤销上一次的 commit 提交
+
+`chore`：构建过程或辅助工具变动
 
